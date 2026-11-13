@@ -1,106 +1,575 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Basic -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Master the Market – Beginner's Guide</title>
-  <meta name="description" content="100% free stock market education. Learn chart reading, technical analysis, and risk management. No buy/sell tips. For learning purpose only.">
-  <link rel="canonical" href="https://example.com/">
-
-  <!-- Performance -->
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trade With Munaaf — Precision Market Intelligence</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap" rel="stylesheet">
-
-  <!-- Favicons (optional) -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Master the Market – Beginner's Guide">
-  <meta property="og:description" content="Learn charts & risk management. No buy/sell tips. 100% educational.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://example.com/">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1600&auto=format&fit=crop">
-
-  <!-- Minimal CSS (inline for speed) -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    :root{
-      --bg1:#0c0c1d;
-      --bg2:#1a1a2b;
-      --brand: #00f0ff;
-      --brand-2:#00f0ff;
-      --text:#ffffff;
-      --muted:#b5b5c3;
+    :root {
+      --bg-main: #060911;
+      --bg-card: #0b101c;
+      --bg-header: #080c16;
+      --bg-box: #0f1626;
+      --border-subtle: rgba(255, 255, 255, 0.07);
+      --gold: #f5b316;
+      --gold-glow: rgba(245, 179, 22, 0.35);
+      --green: #14d38a;
+      --red: #ef4444;
+      --cyan: #22b8cf;
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
-    body{
-      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--text);
-      background:
-        linear-gradient(135deg, rgba(0,0,0,.45), rgba(0,0,0,.45)),
-        url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1600&auto=format&fit=crop') no-repeat center/cover fixed;
-      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      min-height:100vh;
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    .container{
-      max-width:520px; margin:0 auto; padding:24px 18px; text-align:center; min-height:100vh; display:flex; flex-direction:column; justify-content:center;
-      backdrop-filter: saturate(130%);
+
+    body {
+      background-color: var(--bg-main);
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 38px 38px;
     }
-    .badge{display:inline-block; font-size:.78rem; padding:6px 10px; border:1px solid #2a2a3a; border-radius:999px; color:#d6eaff; background:rgba(0,240,255,.08); margin-bottom:14px}
-    h1{font-size:1.9rem; line-height:1.2; margin:6px 0 10px; background:linear-gradient(90deg,var(--brand-2),var(--brand)); -webkit-background-clip:text; background-clip:text; color:transparent;}
-    .sub{font-size:1rem; color:var(--muted); margin:0 auto 16px; max-width:36ch}
-    .pill{
-      display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:rgba(0,255,153,.07); border:1px dashed rgba(0,255,153,.35); color:#d8ffe9; font-size:.9rem; margin:6px 0 18px;
+
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
     }
-    ul.bullets{list-style:none; padding:0; margin:0 0 18px}
-    ul.bullets li{margin:8px 0; color:#e9eef9}
-    .cta{
-      display:inline-block; text-decoration:none; background:var(--brand); color:#041b14; padding:14px 18px; font-weight:700; border-radius:12px; box-shadow:0 0 0 0 rgba(0,255,153,.6); transform:translateZ(0);
-      transition:transform .15s ease;
-      animation:pulse 1.6s infinite;
+
+    /* Top Infinite Stock Ticker */
+    .ticker-wrap {
+      width: 100%;
+      overflow: hidden;
+      background: #070b14;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 9px 0;
+      white-space: nowrap;
+      position: relative;
+      z-index: 20;
     }
-    .cta:active{transform:scale(.98)}
-    @keyframes pulse{
-      0%{box-shadow:0 0 0 0 rgba(0,255,153,.55)}
-      70%{box-shadow:0 0 0 20px rgba(0,255,153,0)}
-      100%{box-shadow:0 0 0 0 rgba(0,255,153,0)}
+
+    .ticker-track {
+      display: inline-flex;
+      animation: tickerScroll 32s linear infinite;
     }
-    .fineprint{font-size:.86rem; color:var(--muted); margin:18px auto 0; max-width:44ch}
-    .disclaimer{font-size:.78rem; color:#9aa4b2; margin:18px auto 0; max-width:50ch}
-    .safe{display:flex; align-items:center; justify-content:center; gap:8px; margin-top:14px; color:#a1ffd6; font-size:.9rem}
-    .shield{width:18px; height:18px; display:inline-block; border-radius:4px; background:linear-gradient(135deg,#0df,#0f9)}
-    footer{opacity:.8; margin-top:22px; font-size:.78rem; color:#9aa4b2}
+
+    .ticker-wrap:hover .ticker-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes tickerScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 22px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.03em;
+    }
+
+    /* Terminal Main Card */
+    .terminal-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(245, 179, 22, 0.28);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.75), 0 0 35px rgba(245, 179, 22, 0.06);
+    }
+
+    /* Logo Box */
+    .logo-box {
+      width: 82px;
+      height: 82px;
+      border-radius: 16px;
+      background: #0d1424;
+      border: 1.5px solid rgba(245, 179, 22, 0.65);
+      box-shadow: 0 0 22px rgba(245, 179, 22, 0.18);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 14px;
+    }
+
+    .pro-badge {
+      position: absolute;
+      bottom: -8px;
+      right: -10px;
+      background: #14d38a;
+      color: #04130d;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 800;
+      font-size: 9px;
+      padding: 2px 7px;
+      border-radius: 5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      box-shadow: 0 2px 8px rgba(20, 211, 138, 0.4);
+      z-index: 10;
+    }
+
+    /* Pill Badges */
+    .pill-gold {
+      background: rgba(245, 179, 22, 0.09);
+      border: 1px solid rgba(245, 179, 22, 0.35);
+      color: #f5b316;
+    }
+
+    .pill-red {
+      background: rgba(239, 68, 68, 0.11);
+      border: 1px solid rgba(239, 68, 68, 0.38);
+      color: #f87171;
+    }
+
+    .pill-cyan {
+      background: rgba(34, 184, 207, 0.1);
+      border: 1px solid rgba(34, 184, 207, 0.35);
+      color: #38bdf8;
+    }
+
+    /* Primary CTA Button */
+    .cta-btn {
+      background: linear-gradient(180deg, #fbc02d 0%, #f59e0b 100%);
+      color: #090d16;
+      box-shadow: 0 0 28px rgba(245, 179, 22, 0.42);
+      transition: all 0.22s ease;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 38px rgba(245, 179, 22, 0.65);
+      filter: brightness(1.05);
+    }
+
+    .cta-btn:active {
+      transform: translateY(0);
+    }
+
+    /* Live Dot Pulse */
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+    .pulse-dot {
+      animation: pulseDot 1.6s infinite ease-in-out;
+    }
+
+    /* Candlestick animation */
+    @keyframes candleFloat {
+      0%, 100% { transform: scaleY(1); }
+      50% { transform: scaleY(1.12); }
+    }
+    .candle-bar {
+      transform-origin: bottom;
+      animation: candleFloat 2.4s infinite ease-in-out;
+    }
+
+    /* Feature Row Card */
+    .feature-row {
+      background: #0d1322;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.2s ease;
+    }
+
+    .feature-row:hover {
+      border-color: rgba(245, 179, 22, 0.35);
+      background: #10182b;
+      transform: translateX(2px);
+    }
+
+    /* Modal Backdrop */
+    .modal-backdrop {
+      background: rgba(4, 7, 13, 0.85);
+      backdrop-filter: blur(6px);
+    }
   </style>
 </head>
-<body>
-  <main class="container">
-    <span class="badge">100% Educational • Policy Safe</span>
-    <h1>Master the Market – Beginner's Guide</h1>
-    <p class="sub">Master the basics with beginner-friendly lessons</p>
+<body class="flex flex-col min-h-screen">
 
-    <div class="pill">🚫 No Buy/Sell Tips • ✅ For Learning Purpose Only</div>
+  <!-- TOP RUNNING TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <!-- Set 1 -->
+      <div class="ticker-item">
+        <span class="text-slate-300 font-semibold">TCS</span>
+        <span class="text-emerald-400">4,150.00<br><span class="text-[10px]">+0.80%</span></span>
+      </div>
+      <div class="ticker-item">
+        <span class="text-slate-300 font-semibold">INFY</span>
+        <span class="text-rose-400">1,880.20<br><span class="text-[10px]">-0.65%</span></span>
+      </div>
+      <div class="ticker-item">
+        <span class="text-slate-300 font-semibold">TATAMOTORS</span>
+        <span class="text-emerald-400">985.40<br><span class="text-[10px]">+3.12%</span></span>
+      </div>
+      <div class="ticker-item">
+        <span class="text-amber-400">📈</span>
+        <span class="text-slate-300 font-semibold">NIFTY</span>
+        <span class="text-emerald-400">22,510.40<br><span class="text-[10px]">+1.35%</span></span>
+      </div>
+      <div class="ticker-item">
+        <span class="text-slate-300 font-semibold">BANKNIFTY</span>
+        <span class="text-emerald-400">48,920.15<br><span class="text-[10px]">+1.10%</span></span>
+      </div>
+      <div class="ticker-item">
+        <span class="text-slate-300 font-semibold">SENSEX</span>
+        <span class="text-emerald-400">74,120.80<br><span class="text-[10px]">+0.95%</span></span>
+      </div>
+      <div class="ticker-item">
+        <span class="text-slate-300 font-semibold">RELIANCE</span>
+        <span class="text-rose-400">2,912.00<br><span class="text-[10px]">-0.42%</span></span>
+      </div>
+      <div class="ticker-item">
+        <span class="text-slate-300 font-semibold leading-tight">HDFC<br>BANK</span>
+        <span class="text-emerald-400">1,695.50<br><span class="text-[10px]">+2.30%</span></span>
+      </div>
 
-    <ul class="bullets" aria-label="What you'll learn">
-      <li>• Chart basics & risk rules (no return promises)</li>
-      <li>• How to read trends without speculation</li>
-      <li>• Market discipline & common mistakes</li>
-    </ul>
+      <!-- Set 2 (Duplicate for seamless loop) -->
+      <div class="ticker-item">
+        <span class="text-slate-300 font-semibold">TCS</span>
+        <span class="text-emerald-400">4,150.00<br><span class="text-[10px]">+0.80%</span></span>
+      </div>
+      <div class="ticker-item">
+        <span class="text-slate-300 font-semibold">INFY</span>
+        <span class="text-rose-400">1,880.20<br><span class="text-[10px]">-0.65%</span></span>
+      </div>
+      <div class="ticker-item">
+        <span class="text-slate-300 font-semibold">TATAMOTORS</span>
+        <span class="text-emerald-400">985.40<br><span class="text-[10px]">+3.12%</span></span>
+      </div>
+      <div class="ticker-item">
+        <span class="text-amber-400">📈</span>
+        <span class="text-slate-300 font-semibold">NIFTY</span>
+        <span class="text-emerald-400">22,510.40<br><span class="text-[10px]">+1.35%</span></span>
+      </div>
+      <div class="ticker-item">
+        <span class="text-slate-300 font-semibold">BANKNIFTY</span>
+        <span class="text-emerald-400">48,920.15<br><span class="text-[10px]">+1.10%</span></span>
+      </div>
+      <div class="ticker-item">
+        <span class="text-slate-300 font-semibold">SENSEX</span>
+        <span class="text-emerald-400">74,120.80<br><span class="text-[10px]">+0.95%</span></span>
+      </div>
+      <div class="ticker-item">
+        <span class="text-slate-300 font-semibold">RELIANCE</span>
+        <span class="text-rose-400">2,912.00<br><span class="text-[10px]">-0.42%</span></span>
+      </div>
+      <div class="ticker-item">
+        <span class="text-slate-300 font-semibold leading-tight">HDFC<br>BANK</span>
+        <span class="text-emerald-400">1,695.50<br><span class="text-[10px]">+2.30%</span></span>
+      </div>
+    </div>
+  </div>
 
-    <!-- CTA goes to a page-specific bridge -->
-    <a class="cta" href="bridge-lp77.html" rel="nofollow">Start Learning</a>
+  <!-- MAIN TERMINAL CONTAINER -->
+  <main class="flex-1 flex items-center justify-center px-3 py-6 sm:py-10">
+    <div class="terminal-card w-full max-w-[440px] rounded-2xl overflow-hidden">
 
-    <div class="safe"><span class="shield" aria-hidden="true"></span> Ad Policy Friendly Content</div>
+      <!-- Terminal Top Bar -->
+      <div class="bg-[#080c16] px-4 py-3 border-b border-white/[0.06] flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-950 border border-emerald-500/40"></span>
+          <span class="font-mono-code text-[11px] font-semibold tracking-wider text-slate-300">
+            TWM_TERMINAL <span class="text-slate-500">// v3.8</span>
+          </span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#f5b316]"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#f97316]"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#ef4444]"></span>
+        </div>
+      </div>
 
-    <p class="fineprint">We focus on concepts & frameworks suitable for beginners.</p>
-    <p class="disclaimer"><em>This website is for educational purposes only. We do not provide investment, trading, or financial advice.</em></p>
+      <!-- Hero Section -->
+      <div class="px-5 pt-7 pb-6 flex flex-col items-center text-center border-b border-white/[0.06]">
+        
+        <!-- LOGO IMAGE BOX (Replace src="YOUR_IMAGE_URL_HERE" with your image URL) -->
+        <div class="logo-box mb-5">
+          <img src="munaaf image.png" alt="Trade With Munaaf Logo" />
+          <span class="pro-badge">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            PRO
+          </span>
+        </div>
 
-    <footer>© <span id="y"></span> Market Basics Learning Hub</footer>
+        <!-- Title & Subtitle -->
+        <h1 class="text-[23px] sm:text-[25px] font-extrabold tracking-wide text-white uppercase leading-tight">
+          TRADE WITH MUNAAF
+        </h1>
+        <p class="font-mono-code text-[10.5px] tracking-[0.2em] text-[#f5b316] uppercase mt-1.5 font-medium">
+          PRECISION MARKET INTELLIGENCE
+        </p>
+
+        <!-- 3 Status Pills -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mt-4 mb-6">
+          <span class="pill-gold font-mono-code text-[9.5px] font-semibold px-2.5 py-1 rounded-full inline-flex items-center gap-1.5">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
+            </svg>
+            VIP STRATEGY
+          </span>
+          <span class="pill-red font-mono-code text-[9.5px] font-semibold px-2.5 py-1 rounded-full inline-flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-rose-500 pulse-dot"></span>
+            LIVE SIGNALS
+          </span>
+          <span class="pill-cyan font-mono-code text-[9.5px] font-semibold px-2.5 py-1 rounded-full inline-flex items-center gap-1.5">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+            </svg>
+            100K+ MEMBERS
+          </span>
+        </div>
+
+        <!-- Main Telegram CTA Button -->
+        <a href="https://t.me/+dlpNeUgalydiM2Rl" target="_blank" rel="noopener noreferrer"
+           class="cta-btn w-full py-3.5 px-5 rounded-xl font-bold text-[13.5px] tracking-wide uppercase flex items-center justify-center gap-2.5 cursor-pointer">
+          <span class="w-5 h-5 rounded-full bg-[#090d16] text-[#f5b316] flex items-center justify-center">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M21.9 3.6c-.3-.3-.8-.4-1.2-.2L2.6 10.6c-.5.2-.8.6-.8 1.1 0 .5.3.9.8 1.1l4.6 1.6 1.7 5.3c.1.4.5.7.9.8h.2c.4 0 .7-.2.9-.5l2.6-3.4 4.8 3.5c.2.2.5.2.7.2.2 0 .4 0 .6-.1.4-.2.6-.5.7-.9l2.9-14.3c.1-.4-.1-.8-.3-1.1zM9.8 14.3l8.4-7.4-6.7 8.4-.4 3.2-1.3-4.2z"/>
+            </svg>
+          </span>
+          <span>JOIN FREE TELEGRAM CHANNEL</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+
+      <!-- 3-Column Metrics Strip -->
+      <div class="grid grid-cols-3 divide-x divide-white/[0.07] py-4 border-b border-white/[0.06] bg-[#0a0f1a]">
+        <div class="text-center px-2">
+          <div class="font-mono-code text-[16px] font-bold text-[#f5b316]">98.2%</div>
+          <div class="font-mono-code text-[9px] tracking-widest text-slate-400 uppercase mt-0.5">ACCURACY</div>
+        </div>
+        <div class="text-center px-2">
+          <div class="font-mono-code text-[16px] font-bold text-white">100K+</div>
+          <div class="font-mono-code text-[9px] tracking-widest text-slate-400 uppercase mt-0.5">TRADERS</div>
+        </div>
+        <div class="text-center px-2">
+          <div class="font-mono-code text-[16px] font-bold text-[#14d38a]">24/7</div>
+          <div class="font-mono-code text-[9px] tracking-widest text-slate-400 uppercase mt-0.5">ANALYSIS</div>
+        </div>
+      </div>
+
+      <!-- Live Pattern Analysis Candlestick Box -->
+      <div class="px-5 pt-4 pb-3">
+        <div class="flex items-center justify-between mb-2.5">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-[#14d38a] pulse-dot"></span>
+            <span class="font-mono-code text-[9.5px] tracking-wider text-slate-400 uppercase">LIVE PATTERN ANALYSIS</span>
+          </div>
+          <span class="font-mono-code text-[9.5px] font-semibold text-[#14d38a]">
+            ▲ +14.8% PROFIT MOMENTUM
+          </span>
+        </div>
+
+        <!-- Candlestick Chart Frame -->
+        <div class="bg-[#080c15] border border-white/[0.05] rounded-xl px-4 py-3 h-[76px] flex items-end justify-between">
+          <!-- Candle 1 (Red) -->
+          <div class="flex flex-col items-center h-full justify-end">
+            <div class="w-[1.5px] h-2 bg-rose-500"></div>
+            <div class="w-2 h-7 bg-rose-500 rounded-[1px] candle-bar" style="animation-delay: 0.1s"></div>
+            <div class="w-[1.5px] h-1.5 bg-rose-500"></div>
+          </div>
+          <!-- Candle 2 (Green) -->
+          <div class="flex flex-col items-center h-full justify-end">
+            <div class="w-[1.5px] h-2 bg-[#14d38a]"></div>
+            <div class="w-2 h-9 bg-[#14d38a] rounded-[1px] candle-bar" style="animation-delay: 0.3s"></div>
+            <div class="w-[1.5px] h-2 bg-[#14d38a]"></div>
+          </div>
+          <!-- Candle 3 (Green) -->
+          <div class="flex flex-col items-center h-full justify-end">
+            <div class="w-[1.5px] h-2 bg-[#14d38a]"></div>
+            <div class="w-2 h-6 bg-[#14d38a] rounded-[1px] candle-bar" style="animation-delay: 0.5s"></div>
+            <div class="w-[1.5px] h-1.5 bg-[#14d38a]"></div>
+          </div>
+          <!-- Candle 4 (Red) -->
+          <div class="flex flex-col items-center h-full justify-end">
+            <div class="w-[1.5px] h-1.5 bg-rose-500"></div>
+            <div class="w-2 h-7 bg-rose-500 rounded-[1px] candle-bar" style="animation-delay: 0.7s"></div>
+            <div class="w-[1.5px] h-2 bg-rose-500"></div>
+          </div>
+          <!-- Candle 5 (Green) -->
+          <div class="flex flex-col items-center h-full justify-end">
+            <div class="w-[1.5px] h-2 bg-[#14d38a]"></div>
+            <div class="w-2 h-9 bg-[#14d38a] rounded-[1px] candle-bar" style="animation-delay: 0.9s"></div>
+            <div class="w-[1.5px] h-1.5 bg-[#14d38a]"></div>
+          </div>
+          <!-- Candle 6 (Green Tall) -->
+          <div class="flex flex-col items-center h-full justify-end">
+            <div class="w-[1.5px] h-2.5 bg-[#14d38a]"></div>
+            <div class="w-2 h-11 bg-[#14d38a] rounded-[1px] candle-bar" style="animation-delay: 1.1s"></div>
+            <div class="w-[1.5px] h-1.5 bg-[#14d38a]"></div>
+          </div>
+          <!-- Candle 7 (Red) -->
+          <div class="flex flex-col items-center h-full justify-end">
+            <div class="w-[1.5px] h-1.5 bg-rose-500"></div>
+            <div class="w-2 h-5 bg-rose-500 rounded-[1px] candle-bar" style="animation-delay: 1.3s"></div>
+            <div class="w-[1.5px] h-1.5 bg-rose-500"></div>
+          </div>
+          <!-- Candle 8 (Green Tick) -->
+          <div class="flex flex-col items-center h-full justify-end">
+            <div class="w-[1.5px] h-3 bg-[#14d38a] candle-bar" style="animation-delay: 1.5s"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Feature Cards List -->
+      <div class="px-5 pb-5 space-y-2.5">
+        <!-- Row 1 -->
+        <a href="https://t.me/+dlpNeUgalydiM2Rl" target="_blank" rel="noopener noreferrer"
+           class="feature-row rounded-xl p-3.5 flex items-center justify-between group">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-lg bg-[#1d1a14] border border-amber-500/20 flex items-center justify-center text-[#f5b316] shrink-0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M11 2v9H2c0 5.5 4.5 10 10 10s10-4.5 10-10c0-5-3.7-9.1-8.5-9.9V2h-2.5zm2 2.1c3.4.6 6 3.5 6 6.9h-6V4.1z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-[13.5px] font-bold text-white leading-snug">Nifty &amp; BankNifty Strategy</h3>
+              <p class="font-mono-code text-[9.5px] tracking-wider text-slate-400 uppercase mt-0.5">
+                DAILY ACCURATE BREAKOUT LEVELS
+              </p>
+            </div>
+          </div>
+          <svg class="text-slate-500 group-hover:text-amber-400 transition-colors" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+
+        <!-- Row 2 -->
+        <a href="https://t.me/+dlpNeUgalydiM2Rl" target="_blank" rel="noopener noreferrer"
+           class="feature-row rounded-xl p-3.5 flex items-center justify-between group">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-lg bg-[#0d2220] border border-emerald-500/20 flex items-center justify-center text-[#14d38a] shrink-0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-[13.5px] font-bold text-white leading-snug">Real-Time Trade Signals</h3>
+              <p class="font-mono-code text-[9.5px] tracking-wider text-slate-400 uppercase mt-0.5">
+                INSTANT ENTRY &amp; EXIT ALERTS
+              </p>
+            </div>
+          </div>
+          <svg class="text-slate-500 group-hover:text-emerald-400 transition-colors" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+
+        <!-- Row 3 -->
+        <a href="https://t.me/+dlpNeUgalydiM2Rl" target="_blank" rel="noopener noreferrer"
+           class="feature-row rounded-xl p-3.5 flex items-center justify-between group">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-lg bg-[#0e1f2d] border border-sky-500/20 flex items-center justify-center text-[#38bdf8] shrink-0">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-[13.5px] font-bold text-white leading-snug">Master Trader Education</h3>
+              <p class="font-mono-code text-[9.5px] tracking-wider text-slate-400 uppercase mt-0.5">
+                PRICE ACTION &amp; RISK MANAGEMENT
+              </p>
+            </div>
+          </div>
+          <svg class="text-slate-500 group-hover:text-sky-400 transition-colors" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Footer Links & Compliance Bar -->
+      <div class="bg-[#070b14] border-t border-white/[0.06] px-5 pt-4 pb-4">
+        <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-3.5">
+          <button onclick="openModal('about')" class="font-mono-code text-[10.5px] font-semibold text-[#f5b316] hover:underline cursor-pointer">[ABOUT]</button>
+          <button onclick="openModal('terms')" class="font-mono-code text-[10.5px] font-semibold text-[#f5b316] hover:underline cursor-pointer">[TERMS]</button>
+          <button onclick="openModal('disclaimer')" class="font-mono-code text-[10.5px] font-semibold text-[#f5b316] hover:underline cursor-pointer">[DISCLAIMER]</button>
+          <button onclick="openModal('contact')" class="font-mono-code text-[10.5px] font-semibold text-[#f5b316] hover:underline cursor-pointer">[CONTACT]</button>
+        </div>
+
+        <div class="flex items-center justify-between font-mono-code text-[9px] tracking-wider text-slate-500 uppercase">
+          <span>FOR EDUCATIONAL PURPOSES ONLY</span>
+          <span>ADV BY D.A.E.</span>
+        </div>
+      </div>
+
+    </div>
   </main>
 
+  <!-- COMPLIANCE POPUP MODAL -->
+  <div id="infoModal" class="fixed inset-0 modal-backdrop hidden items-center justify-center p-4 z-50" onclick="closeModalOnBg(event)">
+    <div class="bg-[#0b101c] border border-amber-500/30 rounded-2xl max-w-md w-full p-5 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-3">
+        <h3 id="modalTitle" class="font-mono-code text-sm font-bold text-[#f5b316] uppercase"></h3>
+        <button onclick="closeModal()" class="text-slate-400 hover:text-white font-mono-code text-xs px-2 py-1 rounded bg-white/5 cursor-pointer">✕</button>
+      </div>
+      <p id="modalBody" class="text-xs leading-relaxed text-slate-300"></p>
+      <div class="mt-4 pt-3 border-t border-white/10 text-right">
+        <button onclick="closeModal()" class="bg-[#f5b316] text-[#090d16] font-mono-code text-xs font-bold px-4 py-1.5 rounded-lg cursor-pointer">CLOSE</button>
+      </div>
+    </div>
+  </div>
+
   <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
+    const modalData = {
+      about: {
+        title: '// ABOUT TRADE WITH MUNAAF',
+        body: 'Trade With Munaaf is a market education and technical chart analysis community dedicated to sharing Nifty, BankNifty, and price action insights for learning purposes.'
+      },
+      terms: {
+        title: '// TERMS & CONDITIONS',
+        body: 'By accessing this terminal or joining our Telegram channel, you agree that all shared setups, charts, and levels are strictly for educational study and self-analysis.'
+      },
+      disclaimer: {
+        title: '// SEBI & RISK DISCLAIMER',
+        body: 'We are NOT SEBI-registered investment advisors. Trading in derivatives, Nifty, and BankNifty involves substantial market risk. Past chart performance does not guarantee future results. Consult a certified financial advisor before investing.'
+      },
+      contact: {
+        title: '// CONTACT & SUPPORT',
+        body: 'For community queries or support, connect directly via our official Telegram channel: https://t.me/+dlpNeUgalydiM2Rl'
+      }
+    };
+
+    function openModal(key) {
+      document.getElementById('modalTitle').textContent = modalData[key].title;
+      document.getElementById('modalBody').textContent = modalData[key].body;
+      const modal = document.getElementById('infoModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('infoModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function closeModalOnBg(e) {
+      if (e.target.id === 'infoModal') closeModal();
+    }
   </script>
 </body>
 </html>
